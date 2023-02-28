@@ -78,9 +78,9 @@ class AddressController extends Controller
             return response()->json(
                 [
                     'message' => 'Address deleted successfully',
-                    'status_code' => 200
+                    'status_code' => 204 
                 ],
-                200
+                204 
             );
         } else {
             return response()->json(
