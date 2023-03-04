@@ -114,9 +114,9 @@ class CustomerController extends Controller
             return response()->json(
                 [
                     'message' => 'Customer deleted successfully',
-                    'status_code' => 200
+                    'status_code' => 204
                 ],
-                200
+                204
             );
         } else {
             return response()->json(
