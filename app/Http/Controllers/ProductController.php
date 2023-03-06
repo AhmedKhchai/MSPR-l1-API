@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index(): JsonResponse
     {
-        $product = Product::all();
+        $product = Product::with(['productDetail'])->get();
         return response()->json($product);
     }
 
@@ -23,15 +23,15 @@ class ProductController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
-        $productDetails = new ProductDetail;
-        $productDetails->price = $request->price;
-        $productDetails->description = $request->description;
-        $productDetails->color = $request->color;
-        $productDetails->save();
+        $productDetail = new ProductDetail();
+        $productDetail->price = $request->price;
+        $productDetail->description = $request->description;
+        $productDetail->color = $request->color;
+        $productDetail->save();
         $product = new Product();
         $product->name = $request->name;
         $product->stock = $request->stock;
-        $product->product_detail_id = $productDetails->id;
+        $product->product_detail_id = $productDetail->id;
         if ($product->save()) {
             return response()->json($product);
         } else {
@@ -50,8 +50,8 @@ class ProductController extends Controller
      */
     public function show(string $id): JsonResponse
     {
-        $order = Product::find($id);
-        return response()->json($order);
+        $product = Product::find($id)->with(['productDetail']);
+        return response()->json($product);
     }
 
     /**
@@ -59,10 +59,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id): JsonResponse
     {
-        $order = Product::find($id);
-        $order->customer_id = $request->customer_id;
-        if ($order->save()) {
-            return response()->json($order);
+        $product = Product::find($id);
+        $productDetail = $product->productDetail;
+        $productDetail->price = $request->price;
+        $productDetail->description = $request->description;
+        $productDetail->color = $request->color;
+        $productDetail->save();
+
+        $product->name = $request->name;
+        $product->stock = $request->stock;
+        if ($product->save()) {
+            return response()->json($product);
         } else {
             return response()->json(
                 [
@@ -72,7 +79,6 @@ class ProductController extends Controller
                 500
             );
         }
-
     }
 
     /**
@@ -80,8 +86,8 @@ class ProductController extends Controller
      */
     public function destroy(string $id): JsonResponse
     {
-        $order = Product::find($id);
-        if ($order->delete()) {
+        $product = Product::find($id);
+        if ($product->delete()) {
             return response()->json(
                 [
                     'message' => 'Product deleted successfully',
@@ -98,6 +104,5 @@ class ProductController extends Controller
                 500
             );
         }
-
     }
 }

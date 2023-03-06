@@ -13,7 +13,7 @@ class OrderController extends Controller
      */
     public function index(): JsonResponse
     {
-        $orders = Order::all();
+        $orders = Order::with(['customer', 'product', 'product.productDetail'])->get();
         return response()->json($orders);
     }
 
@@ -24,6 +24,8 @@ class OrderController extends Controller
     {
         $order = new Order();
         $order->customer_id = $request->customer_id;
+        $order->product_id = $request->product_id;
+        $order->quantity = $request->quantity;
         if ($order->save()) {
             return response()->json($order);
         } else {
@@ -42,7 +44,7 @@ class OrderController extends Controller
      */
     public function show(string $id): JsonResponse
     {
-        $order = Order::find($id);
+        $order = Order::find($id)->with(['customer', 'product', 'product.productDetail'])->get();
         return response()->json($order);
     }
 
@@ -53,6 +55,8 @@ class OrderController extends Controller
     {
         $order = Order::find($id);
         $order->customer_id = $request->customer_id;
+        $order->product_id = $request->product_id;
+        $order->quantity = $request->quantity;
         if ($order->save()) {
             return response()->json($order);
         } else {
