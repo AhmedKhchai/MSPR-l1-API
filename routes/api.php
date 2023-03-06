@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 
 
 Route::apiResources([
@@ -15,4 +16,5 @@ Route::apiResources([
     'address' => AddressController::class,
     'customers' => CustomerController::class,
     'orders' => OrderController::class,
+    'products' => ProductController::class,
 ]);
