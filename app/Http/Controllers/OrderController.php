@@ -44,7 +44,7 @@ class OrderController extends Controller
      */
     public function show(string $id): JsonResponse
     {
-        $order = Order::find($id)->with(['customer', 'product', 'product.productDetail'])->get();
+        $order = Order::with(['customer', 'product', 'product.productDetail'])->find($id);
         return response()->json($order);
     }
 
