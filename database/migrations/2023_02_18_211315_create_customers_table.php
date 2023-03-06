@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('username');
             $table->string('firstName')->nullable();
             $table->string('lastName')->nullable();
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->boolean('is_client')->default(false);
             $table->unsignedBigInteger('address_id');
             $table->foreign('address_id')
