@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProductDetail;
 use App\Http\Requests\StoreProductDetailRequest;
 use App\Http\Requests\UpdateProductDetailRequest;
+use App\Models\ProductDetail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 

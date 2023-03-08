@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProductDetail;
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
 use App\Models\Product;
+use App\Models\ProductDetail;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -15,6 +15,7 @@ class ProductController extends Controller
     public function index(): JsonResponse
     {
         $product = Product::with(['productDetail'])->get();
+
         return response()->json($product);
     }
 
@@ -38,7 +39,7 @@ class ProductController extends Controller
             return response()->json(
                 [
                     'message' => 'Some error occurred, please try agian',
-                    'status_code' => 500
+                    'status_code' => 500,
                 ],
                 500
             );
@@ -51,6 +52,7 @@ class ProductController extends Controller
     public function show(string $id): JsonResponse
     {
         $product = Product::with(['productDetail'])->find($id);
+
         return response()->json($product);
     }
 
@@ -74,7 +76,7 @@ class ProductController extends Controller
             return response()->json(
                 [
                     'message' => 'Some error occurred, please try agian',
-                    'status_code' => 500
+                    'status_code' => 500,
                 ],
                 500
             );
@@ -91,7 +93,7 @@ class ProductController extends Controller
             return response()->json(
                 [
                     'message' => 'Product deleted successfully',
-                    'status_code' => 204
+                    'status_code' => 204,
                 ],
                 204
             );
@@ -99,7 +101,7 @@ class ProductController extends Controller
             return response()->json(
                 [
                     'message' => 'Some error occurred, please try agian',
-                    'status_code' => 500
+                    'status_code' => 500,
                 ],
                 500
             );

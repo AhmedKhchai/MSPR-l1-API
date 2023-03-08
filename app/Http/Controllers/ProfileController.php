@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profile;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
@@ -14,6 +14,7 @@ class ProfileController extends Controller
     public function index(): JsonResponse
     {
         $profiles = Profile::all();
+
         return response()->json($profiles);
     }
 
@@ -31,7 +32,7 @@ class ProfileController extends Controller
             return response()->json(
                 [
                     'message' => 'Some error occurred, please try agian',
-                    'status_code' => 500
+                    'status_code' => 500,
                 ],
                 500
             );
@@ -50,12 +51,11 @@ class ProfileController extends Controller
             return response()->json(
                 [
                     'message' => 'Profile not found',
-                    'status_code' => 404
+                    'status_code' => 404,
                 ],
                 404
             );
         }
-
     }
 
     /**
@@ -72,7 +72,7 @@ class ProfileController extends Controller
             return response()->json(
                 [
                     'message' => 'Some error occurred, please try agian',
-                    'status_code' => 500
+                    'status_code' => 500,
                 ],
                 500
             );
@@ -89,7 +89,7 @@ class ProfileController extends Controller
             return response()->json(
                 [
                     'message' => 'Profile deleted successfully',
-                    'status_code' => 200
+                    'status_code' => 200,
                 ],
                 200
             );
@@ -97,7 +97,7 @@ class ProfileController extends Controller
             return response()->json(
                 [
                     'message' => 'Some error occurred, please try agian',
-                    'status_code' => 500
+                    'status_code' => 500,
                 ],
                 500
             );

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class AddressController extends Controller
 {
@@ -14,13 +14,14 @@ class AddressController extends Controller
     public function index(): JsonResponse
     {
         $addresses = Address::all();
+
         return response()->json($addresses);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) 
+    public function store(Request $request)
     {
         $address = new Address();
         $address->postalCode = $request['postalCode'];
@@ -31,7 +32,7 @@ class AddressController extends Controller
             return response()->json(
                 [
                     'message' => 'Some error occurred, please try again',
-                    'status_code' => 500
+                    'status_code' => 500,
                 ],
                 500
             );
@@ -44,6 +45,7 @@ class AddressController extends Controller
     public function show($id): JsonResponse
     {
         $address = Address::find($id);
+
         return response()->json($address);
     }
 
@@ -61,7 +63,7 @@ class AddressController extends Controller
             return response()->json(
                 [
                     'message' => 'Some error occurred, please try again',
-                    'status_code' => 500
+                    'status_code' => 500,
                 ],
                 500
             );
@@ -78,15 +80,15 @@ class AddressController extends Controller
             return response()->json(
                 [
                     'message' => 'Address deleted successfully',
-                    'status_code' => 204 
+                    'status_code' => 204,
                 ],
-                204 
+                204
             );
         } else {
             return response()->json(
                 [
                     'message' => 'Some error occurred, please try again',
-                    'status_code' => 500
+                    'status_code' => 500,
                 ],
                 500
             );

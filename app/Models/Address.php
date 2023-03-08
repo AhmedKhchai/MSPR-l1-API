@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Address extends Model
 {
     use HasFactory;
-    protected $fillable = ['postalCode','city'];
+    protected $fillable = ['postalCode', 'city'];
 
     public function customers()
     {
-        return $this->hasMany(Customer::class); 
+        return $this->hasMany(Customer::class);
         //select * from customers where address.id = customers.address_id
     }
 }

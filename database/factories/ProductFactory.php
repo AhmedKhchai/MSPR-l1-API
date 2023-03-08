@@ -19,8 +19,8 @@ class ProductFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'stock' => fake()->numberBetween(0,2000),
-            'product_detail_id' => ProductDetail::factory()
+            'stock' => fake()->numberBetween(0, 2000),
+            'product_detail_id' => ProductDetail::factory(),
         ];
     }
 }
