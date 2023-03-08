@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\ProductDetail;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->name(),
+            'stock' => fake()->numberBetween(0,2000),
+            'product_detail_id' => ProductDetail::factory()
         ];
     }
 }
