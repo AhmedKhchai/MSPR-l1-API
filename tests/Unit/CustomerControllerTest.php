@@ -34,21 +34,7 @@ class CustomerControllerTest extends TestCase
      */
     public function testStore()
     {
-        $address = Address::factory()->create();
-        $profile = Profile::factory()->create();
-        $company = Company::factory()->create();
-        $data = [
-            "name" => $this->faker->name,
-            "username" => $this->faker->userName,
-            "firstName" => $this->faker->firstName,
-            "lastName" => $this->faker->lastName,
-            "email" => $this->faker->email,
-            "is_client" => $this->faker->boolean,
-            "address_id" => $address['id'],
-            "profile_id" => $profile['id'],
-            "company_id" => $company['id'],
-        ];
-
+        $data = Customer::factory()->make()->toArray();
         $response = $this->postJson('/api/customers', $data);
         $response->assertStatus(200);
         $this->assertDatabaseHas('customers', $data);
