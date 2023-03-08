@@ -1,9 +1,10 @@
 <?php
 
 namespace Database\Factories;
+
 use App\Models\Address;
-use App\Models\Profile;
 use App\Models\Company;
+use App\Models\Profile;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

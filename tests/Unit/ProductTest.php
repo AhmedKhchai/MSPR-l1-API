@@ -36,7 +36,7 @@ class ProductTest extends TestCase
         $productDetail = ProductDetail::factory()->make();
         $dataProduct = [
             'name' => $product->name,
-            'stock' => $product->stock
+            'stock' => $product->stock,
         ];
         $dataProductDetail = [
             'price' => $productDetail->price,
@@ -79,7 +79,7 @@ class ProductTest extends TestCase
             'description' => $productDetail->description,
             'color' => $productDetail->color,
             'name' => $product->name,
-            'stock' => $product->stock
+            'stock' => $product->stock,
         ];
 
         $response = $this->putJson('/api/products/' . $product['id'], $data);

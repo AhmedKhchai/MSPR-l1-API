@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
@@ -13,7 +13,8 @@ class CustomerController extends Controller
      */
     public function index(): JsonResponse
     {
-        $customers = Customer::with(['address','profile','company'])->get();
+        $customers = Customer::with(['address', 'profile', 'company'])->get();
+
         return response()->json($customers);
     }
 
@@ -38,12 +39,11 @@ class CustomerController extends Controller
             return response()->json(
                 [
                     'message' => 'Some error occurred, please try agian',
-                    'status_code' => 500
+                    'status_code' => 500,
                 ],
                 500
             );
         }
-
     }
 
     /**
@@ -58,7 +58,7 @@ class CustomerController extends Controller
             return response()->json(
                 [
                     'message' => 'Customer not found',
-                    'status_code' => 404
+                    'status_code' => 404,
                 ],
                 404
             );
@@ -87,7 +87,7 @@ class CustomerController extends Controller
                 return response()->json(
                     [
                         'message' => 'Some error occurred, please try agian',
-                        'status_code' => 500
+                        'status_code' => 500,
                     ],
                     500
                 );
@@ -96,7 +96,7 @@ class CustomerController extends Controller
             return response()->json(
                 [
                     'message' => 'Customer not found',
-                    'status_code' => 404
+                    'status_code' => 404,
                 ],
                 404
             );
@@ -109,12 +109,11 @@ class CustomerController extends Controller
     public function destroy($id): JsonResponse
     {
         $cusomer = Customer::find($id);
-        if($cusomer->delete())
-        {
+        if ($cusomer->delete()) {
             return response()->json(
                 [
                     'message' => 'Customer deleted successfully',
-                    'status_code' => 204
+                    'status_code' => 204,
                 ],
                 204
             );
@@ -122,11 +121,10 @@ class CustomerController extends Controller
             return response()->json(
                 [
                     'message' => 'Some error occurred, please try agian',
-                    'status_code' => 500
+                    'status_code' => 500,
                 ],
                 500
             );
         }
-
     }
 }

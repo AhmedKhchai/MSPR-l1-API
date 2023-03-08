@@ -11,17 +11,19 @@ class Customer extends Model
 
     public function address()
     {
-        return $this->belongsTo(Address::class); 
+        return $this->belongsTo(Address::class);
         //select * from addresses where customer.address_id = addresses.id
     }
+
     public function profile()
     {
-        return $this->belongsTo(Profile::class); 
+        return $this->belongsTo(Profile::class);
         //select * from profilees where customer.profile_id = profilees.id
     }
+
     public function company()
     {
-        return $this->belongsTo(Company::class); 
+        return $this->belongsTo(Company::class);
         //select * from companyes where customer.company_id = companyes.id
     }
 }

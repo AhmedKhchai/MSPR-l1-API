@@ -2,16 +2,16 @@
 
 namespace Tests\Unit;
 
-use Illuminate\Support\Facades\Log;
-use Tests\TestCase;
 use App\Models\Address;
-use App\Models\Customer;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Log;
+use Tests\TestCase;
 
 class AddressControllerTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
+
     /**
      * Test the index method of the AddressController.
      *

@@ -21,7 +21,7 @@ class CustomerSeeder extends Seeder
 
         $customers = json_decode($response);
 
-        foreach ($customers as $customer){
+        foreach ($customers as $customer) {
             $newCustomer = new Customer();
 
             $newCustomer->name = $customer->name;

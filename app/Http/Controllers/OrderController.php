@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
 use App\Models\Order;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -14,6 +14,7 @@ class OrderController extends Controller
     public function index(): JsonResponse
     {
         $orders = Order::with(['customer', 'product', 'product.productDetail'])->get();
+
         return response()->json($orders);
     }
 
@@ -32,7 +33,7 @@ class OrderController extends Controller
             return response()->json(
                 [
                     'message' => 'Some error occurred, please try agian',
-                    'status_code' => 500
+                    'status_code' => 500,
                 ],
                 500
             );
@@ -45,6 +46,7 @@ class OrderController extends Controller
     public function show(string $id): JsonResponse
     {
         $order = Order::with(['customer', 'product', 'product.productDetail'])->find($id);
+
         return response()->json($order);
     }
 
@@ -63,12 +65,11 @@ class OrderController extends Controller
             return response()->json(
                 [
                     'message' => 'Some error occurred, please try agian',
-                    'status_code' => 500
+                    'status_code' => 500,
                 ],
                 500
             );
         }
-
     }
 
     /**
@@ -81,7 +82,7 @@ class OrderController extends Controller
             return response()->json(
                 [
                     'message' => 'Order deleted successfully',
-                    'status_code' => 204
+                    'status_code' => 204,
                 ],
                 204
             );
@@ -89,11 +90,10 @@ class OrderController extends Controller
             return response()->json(
                 [
                     'message' => 'Some error occurred, please try agian',
-                    'status_code' => 500
+                    'status_code' => 500,
                 ],
                 500
             );
         }
-
     }
 }
