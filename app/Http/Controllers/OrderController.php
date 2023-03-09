@@ -25,10 +25,16 @@ class OrderController extends Controller
     {
         $order = new Order();
         $order->customer_id = $request->customer_id;
-        $order->product_id = $request->product_id;
-        $order->quantity = $request->quantity;
         if ($order->save()) {
-            return response()->json($order);
+            foreach ($request->order_products as $key => $order_product) {
+                $orderProducts = new OrderProducts();
+                $orderProducts->order_id = $order->id;
+                $orderProducts->product_id = $order_product['product_id'];
+                $orderProducts->quantity = $order_product['quantity'];
+                $orderProducts->save();
+            }
+            $order->orderProducts;
+            return response()->json($order, 200);
         } else {
             return response()->json(
                 [
@@ -45,8 +51,7 @@ class OrderController extends Controller
      */
     public function show(string $id): JsonResponse
     {
-        $order = Order::with(['customer', 'product', 'product.productDetail'])->find($id);
-
+        $order = Order::with(['customer', 'orderProducts', 'orderProducts.product'])->find($id);
         return response()->json($order);
     }
 
@@ -57,10 +62,24 @@ class OrderController extends Controller
     {
         $order = Order::find($id);
         $order->customer_id = $request->customer_id;
-        $order->product_id = $request->product_id;
-        $order->quantity = $request->quantity;
         if ($order->save()) {
-            return response()->json($order);
+            foreach ($request->order_products as $key => $order_product) {
+                if (isset($order_product['id'])) {
+                    $orderProducts = OrderProducts::find($order_product['id']);
+                    $orderProducts->order_id = $order->id;
+                    $orderProducts->product_id = $order_product['product_id'];
+                    $orderProducts->quantity = $order_product['quantity'];
+                    $orderProducts->save();
+                } else {
+                    $orderProducts = new OrderProducts();
+                    $orderProducts->order_id = $order->id;
+                    $orderProducts->product_id = $order_product['product_id'];
+                    $orderProducts->quantity = $order_product['quantity'];
+                    $orderProducts->save();
+                }
+            }
+            $order->orderProducts;
+            return response()->json($order, 200);
         } else {
             return response()->json(
                 [
