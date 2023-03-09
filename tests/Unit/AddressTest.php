@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Log;
 use Tests\TestCase;
 
-class AddressControllerTest extends TestCase
+class AddressTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 

@@ -16,3 +16,4 @@ Route::apiResources([
     'orders' => OrderController::class,
     'products' => ProductController::class,
 ]);
+Route::delete('orders/{order_id}/product/{product_id}', [OrderController::class, 'deleteProductFromOrder']);

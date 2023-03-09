@@ -84,8 +84,7 @@ class ProductTest extends TestCase
 
         $response = $this->putJson('/api/products/' . $product['id'], $data);
         $response->assertStatus(200);
-        $this->assertDatabaseHas('product_details', ProductDetail::factory()->create()->toArray());
-        $this->assertDatabaseHas('products', Product::factory()->create()->toArray());
+        $this->assertDatabaseHas('products', $product->toArray());
     }
 
     /**
