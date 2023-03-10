@@ -3,9 +3,11 @@
 namespace Tests\Unit;
 
 use App\Models\Address;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Log;
+use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class AddressTest extends TestCase
@@ -19,6 +21,10 @@ class AddressTest extends TestCase
      */
     public function testIndex()
     {
+        Passport::actingAs(
+            User::factory()->create(),
+            ['superadmin']
+        );
         $addresses = Address::factory()->count(3)->create();
         $response = $this->get('/api/address');
         $response->assertStatus(200);
@@ -32,6 +38,10 @@ class AddressTest extends TestCase
      */
     public function testStore()
     {
+        Passport::actingAs(
+            User::factory()->create(),
+            ['superadmin']
+        );
         $data = Address::factory()->make()->toArray();
         $response = $this->postJson('/api/address', $data);
         $response->assertStatus(200);
@@ -45,6 +55,10 @@ class AddressTest extends TestCase
      */
     public function testShow()
     {
+        Passport::actingAs(
+            User::factory()->create(),
+            ['superadmin']
+        );
         $address = Address::factory()->create();
         $response = $this->get('/api/address/' . $address->id);
         $response->assertStatus(200);
@@ -61,6 +75,10 @@ class AddressTest extends TestCase
      */
     public function testUpdate()
     {
+        Passport::actingAs(
+            User::factory()->create(),
+            ['superadmin']
+        );
         $address = Address::factory()->create();
         $data = [
             'postalCode' => $this->faker->postcode,
@@ -78,6 +96,10 @@ class AddressTest extends TestCase
      */
     public function testDestroy()
     {
+        Passport::actingAs(
+            User::factory()->create(),
+            ['superadmin']
+        );
         $address = Address::factory()->create();
         $response = $this->delete('/api/address/' . $address->id);
         $response->assertStatus(204);
@@ -85,6 +107,10 @@ class AddressTest extends TestCase
 
     public function testHasCustomer()
     {
+        Passport::actingAs(
+            User::factory()->create(),
+            ['superadmin']
+        );
         $address = Address::factory()->hasCustomers(2, [
             'is_client' => '1',
         ])->create();
