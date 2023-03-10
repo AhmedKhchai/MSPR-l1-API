@@ -28,10 +28,8 @@ jobs:
       run: |
         mkdir -p database
         touch database/database.sqlite
-    - name: Setup test requirements 
-      run : php artisan migrate && php artisan passport:install -q && php artisan passport:keys -q
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
-      run: php artisan test
+      run: php artisan migrate && php artisan passport:install -q && php artisan passport:keys -q &&  php artisan test
