@@ -33,8 +33,8 @@ services:
     environment:
       MYSQL_DATABASE: homestead
       MYSQL_USER: homestead
-      MYSQL_PASSWORD: f57eyS8tAf5NSQVQ8GMxjf
-      MYSQL_ROOT_PASSWORD: 3EHervjWnsfzAq3a4DcKjs
+      MYSQL_PASSWORD: qDHwV8*62yaQO0z%#ivr&7c0beO
+      MYSQL_ROOT_PASSWORD: oY9AL5^2E^@*hFmOU6nu*FS9#iD
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
