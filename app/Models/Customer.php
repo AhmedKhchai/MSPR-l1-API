@@ -26,4 +26,9 @@ class Customer extends Model
         return $this->belongsTo(Company::class);
         //select * from companyes where customer.company_id = companyes.id
     }
+    public function orders()
+    {
+        return $this->hasMany(Order::class); 
+        //select * from orders where customer.id = orders.customer_id
+    }
 }

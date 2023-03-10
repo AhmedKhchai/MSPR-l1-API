@@ -20,8 +20,6 @@ class OrderFactory extends Factory
     {
         return [
             'customer_id' => Customer::factory(),
-            'product_id' => Product::factory(),
-            'quantity' => fake()->numberBetween(0, 100),
         ];
     }
 }

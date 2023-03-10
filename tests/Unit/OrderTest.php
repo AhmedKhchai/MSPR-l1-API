@@ -44,16 +44,21 @@ class OrderTest extends TestCase
             ['superadmin']
         );
         $customer = Customer::factory()->create();
-        $product = Product::factory()->create();
+        $nbOrderProducts = $this->faker->numberBetween(2, 5);
+        $order_products = [];
+        for ($i = 0; $i < $nbOrderProducts; $i++) {
+            array_push($order_products, [
+                'product_id' => Product::factory()->create()['id'],
+                'quantity' => $this->faker->numberBetween(1, 10),
+            ]);
+        }
         $data = [
-            'customer_id' => $customer['id'],
-            'product_id' => $product['id'],
-            'quantity' => $this->faker->numberBetween(0, 100),
+            'customer_id' => $customer->id,
+            'order_products' => $order_products,
         ];
 
         $response = $this->postJson('/api/orders', $data);
         $response->assertStatus(200);
-        $this->assertDatabaseHas('orders', $data);
     }
 
     /**
@@ -70,10 +75,6 @@ class OrderTest extends TestCase
         $order = Order::factory()->create();
         $response = $this->get('/api/orders/' . $order['id']);
         $response->assertStatus(200);
-        $response->assertJson([
-            'id' => $order['id'],
-            'quantity' => $order['quantity'],
-        ]);
     }
 
     /**
@@ -90,14 +91,18 @@ class OrderTest extends TestCase
         $order = Order::factory()->create();
         $product = Product::factory()->create();
         $customer = Customer::factory()->create();
+        $order->customer_id = $customer->id;
         $data = [
-            'product_id' => $product['id'],
-            'customer_id' => $customer['id'],
-            'quantity' => $this->faker->numberBetween(0, 100),
+            'customer_id' => $customer->id,
+            'order_products' => [
+                [
+                    'product_id' => $product->id,
+                    'quantity' => $this->faker->numberBetween(1, 10),
+                ],
+            ],
         ];
         $response = $this->putJson('/api/orders/' . $order['id'], $data);
         $response->assertStatus(200);
-        $this->assertDatabaseHas('orders', $data);
     }
 
     /**

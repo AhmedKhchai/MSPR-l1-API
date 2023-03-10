@@ -56,6 +56,7 @@ Route::middleware(['auth:api'])->group(function () {
         Route::get('/orders/{id}', 'show');
         Route::put('/orders/{id}', 'update');
         Route::delete('/orders/{id}', 'destroy');
+        Route::delete('orders/{order_id}/product/{product_id}', 'deleteProductFromOrder');
     });
 });
 

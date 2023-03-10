@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 
-class AddressControllerTest extends TestCase
+class AddressTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
