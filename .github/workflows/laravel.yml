@@ -32,4 +32,4 @@ jobs:
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
-      run: php artisan migrate:refresh && php artisan test
+      run: php artisan migrate:refresh && php artisan passport:install && php artisan passport:keys && php artisan test
