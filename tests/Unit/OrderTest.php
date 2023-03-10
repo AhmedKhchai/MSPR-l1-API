@@ -5,8 +5,10 @@ namespace Tests\Unit;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class OrderTest extends TestCase
@@ -20,6 +22,10 @@ class OrderTest extends TestCase
      */
     public function testIndex()
     {
+        Passport::actingAs(
+            User::factory()->create(),
+            ['superadmin']
+        );
         $orders = Order::factory()->count(3)->create();
         $response = $this->get('/api/orders');
         $response->assertStatus(200);
@@ -33,6 +39,10 @@ class OrderTest extends TestCase
      */
     public function testStore()
     {
+        Passport::actingAs(
+            User::factory()->create(),
+            ['superadmin']
+        );
         $customer = Customer::factory()->create();
         $product = Product::factory()->create();
         $data = [
@@ -53,6 +63,10 @@ class OrderTest extends TestCase
      */
     public function testShow()
     {
+        Passport::actingAs(
+            User::factory()->create(),
+            ['superadmin']
+        );
         $order = Order::factory()->create();
         $response = $this->get('/api/orders/' . $order['id']);
         $response->assertStatus(200);
@@ -69,6 +83,10 @@ class OrderTest extends TestCase
      */
     public function testUpdate()
     {
+        Passport::actingAs(
+            User::factory()->create(),
+            ['superadmin']
+        );
         $order = Order::factory()->create();
         $product = Product::factory()->create();
         $customer = Customer::factory()->create();
@@ -89,6 +107,10 @@ class OrderTest extends TestCase
      */
     public function testDestroy()
     {
+        Passport::actingAs(
+            User::factory()->create(),
+            ['superadmin']
+        );
         $order = Order::factory()->create();
         $response = $this->delete('/api/orders/' . $order['id']);
         $response->assertStatus(204);
