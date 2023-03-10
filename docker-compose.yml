@@ -3,15 +3,20 @@ version: '3'
 networks:
   laravel:
 
-services:
+services:     
   nginx:
-    image: nginx:stable-alpine
+    image: jonasal/nginx-certbot:latest
     container_name: nginx
+    restart: unless-stopped
+    env_file:
+      - ./nginx-certbot.env
     ports:
-      - "80:80"
+      - 80:80
+      - 443:443
     volumes:
       - ./:/var/www/html
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - nginx_secrets:/etc/letsencrypt
+      - ./nginx/conf.d:/etc/nginx/user_conf.d
     depends_on:
       - php
       - mysql
@@ -28,13 +33,14 @@ services:
     environment:
       MYSQL_DATABASE: homestead
       MYSQL_USER: homestead
-      MYSQL_PASSWORD: qDHwV8*62yaQO0z%#ivr&7c0beO
-      MYSQL_ROOT_PASSWORD: oY9AL5^2E^@*hFmOU6nu*FS9#iD
+      MYSQL_PASSWORD: f57eyS8tAf5NSQVQ8GMxjf
+      MYSQL_ROOT_PASSWORD: 3EHervjWnsfzAq3a4DcKjs
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql
     networks:
       - laravel
-
 
   php:
     build:
@@ -80,3 +86,7 @@ services:
     entrypoint: ['php', '/var/www/html/artisan']
     networks:
       - laravel
+
+volumes:
+  nginx_secrets:
+  dbdata:
